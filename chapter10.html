@@ -45,7 +45,7 @@
   <p>C moves down with a positive value, D moves up with a negative value.</p>
   <div style="display: flex; gap: 1rem; align-items: flex-start; flex-wrap: wrap; margin: 0.5rem 0 1rem;">
     <div>
-      <div style="position: relative; top: 4px; display: inline-block; width: 2rem; height: 2rem; line-height: 2rem; text-align: center; border: 1px solid #444; margin-right: 0.5rem;">C</div>
+      <div style="position: relative; top: 10px; display: inline-block; width: 2rem; height: 2rem; line-height: 2rem; text-align: center; border: 1px solid #444; margin-right: 0.5rem;">C</div>
       <div style="position: relative; top: -4px; display: inline-block; width: 2rem; height: 2rem; line-height: 2rem; text-align: center; border: 1px solid #444;">D</div>
     </div>
     <div style="margin: 0;">
@@ -79,6 +79,49 @@
       </code>
     </pre>
   </div>
+
+  <h2>Absolute Positioning</h2>
+  <p>Absolute positioning removes an element from normal flow and places it relative to the nearest positioned ancestor.
+    If no ancestor is positioned, it is placed relative to the initial containing block.
+  </p>
+  <div style="display: flex; gap: 1rem; align-items: flex-start; flex-wrap: wrap; margin: 0.5rem 0 1rem;">
+    <div style="position: relative; width: 12rem; height: 6rem; border: 1px solid #444; padding: 0.5rem;">
+      <div style="position: absolute;top: 0.5rem; right: 0.5rem; border: 1px solid #444; padding: 0.2rem 0.4rem; background: #fff;">Absolute</div>
+      <span style="font-size: 0.9rem;">This box is the containing block.</span>
+    </div>
+    <pre style="margin: 0;"><code>.container {
+  position: relative;
+}
+
+.absolute-box {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+}</code></pre>
+  </div>
+
+  <h4>Example: Product badge on a card</h4>
+  <p>A common website pattern is to position a sale badge in the corner of a product card.</p>
+  <div style="display: flex; gap: 1rem; align-items: flex-start; flex-wrap: wrap; margin: 0.5rem 0 1rem;">
+    <div style="position: relative; width: 12rem; border: 1px solid #444; border-radius: 0.5rem; overflow: hidden; background: #fafafa;">
+      <div style="height: 6rem; background: linear-gradient(135deg, #dfeafc, #f2f5ff); border-bottom: 1px solid #444;"></div>
+      <div style="padding: 0.6rem; font-size: 0.8rem;">
+        <strong>Desk Lamp</strong><br>
+        $49.99
+      </div>
+      <div style="position: absolute; bottom: 0.5rem; right: 0.5rem; background: #e53935; color: #fff; font-size: 0.7rem; font-weight: 700; padding: 0.2rem 0.4rem; border-radius: 0.25rem;">SALE</div>
+    </div>
+    <pre style="margin: 0;"><code>.product-card {
+  position: relative;
+}
+
+.sale-badge {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+}</code></pre>
+  </div>
+
   <h2>Fixed Positioning</h2>
   <p>Fixed positioning is similar to absolute positioning, but the element is positioned relative to the viewport
     instead of its containing block.
@@ -95,6 +138,20 @@
 }</code></pre>
   </div>
 
+  <h4>Example: Chat button in a site corner</h4>
+  <p>Fixed positioning is often used for floating actions that stay visible while the page scrolls.</p>
+  <div style="display: flex; gap: 1rem; align-items: flex-start; flex-wrap: wrap; margin: 0.5rem 0 1rem;">
+    <div style="position: relative; width: 12rem; height: 6rem; border: 1px solid #444; background: #f8f8f8;">
+      <div style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; color: #666; font-size: 0.8rem;">Page content</div>
+      <div style="position: fixed; right: 1rem; bottom: 1rem; background: #1f7a8c; color: #fff; font-weight: 700; padding: 0.4rem 0.7rem; border-radius: 999px; box-shadow: 0 2px 6px rgba(0,0,0,0.15);">Chat</div>
+    </div>
+    <pre style="margin: 0;"><code>.chat-button {
+  position: fixed;
+  right: 1rem;
+  bottom: 1rem;
+}</code></pre>
+  </div>
+
   <h2>Relative Positioning</h2>
   <p>Relative positioning moves an element relative to its normal position in the document flow.</p>
   <div style="display: flex; gap: 1rem; align-items: flex-start; flex-wrap: wrap; margin: 0.5rem 0 1rem;">
@@ -108,6 +165,23 @@
   top: 4px;
 }</code></pre>
   </div>
+
+  <h4>Example: Highlighting a product tag in a listing</h4>
+  <p>Relative positioning is useful for nudging an element without disturbing the surrounding layout.</p>
+  <div style="display: flex; gap: 1rem; align-items: flex-start; flex-wrap: wrap; margin: 0.5rem 0 1rem;">
+    <div style="width: 12rem; border: 1px solid #444; border-radius: 0.5rem; overflow: hidden; background: #fff;">
+      <div style="padding: 0.6rem; font-size: 0.8rem;">
+        <div style="display: inline-block; background: #f6d365; padding: 0.15rem 0.35rem; border-radius: 0.25rem; position: relative; top: -0.2rem; left: 0.1rem;">New</div>
+        <strong style="display: block; margin-top: 0.35rem;">Travel Mug</strong>
+        <span>$24.00</span>
+      </div>
+    </div>
+    <pre style="margin: 0;"><code>.tag {
+  position: relative;
+  top: -0.2rem;
+  left: 0.1rem;
+}</code></pre>
+  </div>
   <h2>Sticky Positioning</h2>
   <p>Sticky positioning is a hybrid of relative and fixed positioning. The element is treated as relative until it crosses a specified threshold, at which point it becomes fixed.</p>
   <div style="display: flex; gap: 1rem; align-items: flex-start; flex-wrap: wrap; margin: 0.5rem 0 1rem;">
@@ -118,6 +192,27 @@
       </div>
     </div>
     <pre style="margin: 0;"><code>.sticky-box {
+  position: sticky;
+  top: 0;
+}</code></pre>
+  </div>
+
+  <h4>Example: Shopping cart summary header</h4>
+  <p>Sticky positioning is commonly used for section headers or pricing summaries that should stay visible while the user scrolls.</p>
+  <div style="display: flex; gap: 1rem; align-items: flex-start; flex-wrap: wrap; margin: 0.5rem 0 1rem;">
+    <div style="position: relative; width: 14rem; height: 8rem; border: 1px solid #444; overflow: auto; background: #fafafa;">
+      <div style="padding: 0.5rem;">
+        <div style="position: sticky; top: 0; background: #fff; border-bottom: 1px solid #444; padding: 0.35rem 0.5rem; font-weight: 700;">Cart Summary</div>
+        <ul style="padding-left: 1rem; margin: 0.5rem 0 0; font-size: 0.75rem; line-height: 1.6;">
+          <li>Notebook</li>
+          <li>Pen Set</li>
+          <li>Planner</li>
+          <li>Desk Organizer</li>
+          <li>Tablet Stand</li>
+        </ul>
+      </div>
+    </div>
+    <pre style="margin: 0;"><code>.summary {
   position: sticky;
   top: 0;
 }</code></pre>

@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Chapter 11: Flexbox Layout</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.5;
+      margin: 1.5rem;
+      color: #222;
+    }
+
+    .demo-block {
+      border: 1px solid #444;
+      padding: 0.75rem;
+      margin: 0.75rem 0 1rem;
+      background: #fafafa;
+    }
+
+    .flex-row,
+    .flex-column,
+    .flex-wrap,
+    .align-demo,
+    .content-demo,
+    .inline-demo {
+      display: flex;
+      gap: 0.5rem;
+      padding: 0.5rem;
+      border: 1px dashed #888;
+      background: #f4f7fb;
+      min-height: 4rem;
+    }
+
+    .flex-item,
+    .inline-item {
+      width: 3.5rem;
+      height: 3.5rem;
+      border: 1px solid #2e5b9f;
+      background: #d9e8ff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      color: #123;
+    }
+
+    .flex-item.tall,
+    .inline-item.tall {
+      height: 5rem;
+    }
+
+    .flex-column {
+      flex-direction: column;
+      min-height: 12rem;
+    }
+
+    .row-reverse { flex-direction: row-reverse; }
+    .column-reverse { flex-direction: column-reverse; }
+
+    .nowrap { flex-wrap: nowrap; }
+    .wrap { flex-wrap: wrap; }
+    .wrap-reverse { flex-wrap: wrap-reverse; }
+
+    .justify-start { justify-content: flex-start; }
+    .justify-end { justify-content: flex-end; }
+    .justify-center { justify-content: center; }
+    .justify-space-between { justify-content: space-between; }
+    .justify-space-around { justify-content: space-around; }
+    .justify-space-evenly { justify-content: space-evenly; }
+
+    .align-stretch { align-items: stretch; }
+    .align-start { align-items: flex-start; }
+    .align-center { align-items: center; }
+    .align-end { align-items: flex-end; }
+    .align-baseline { align-items: baseline; }
+
+    .self-start { align-self: flex-start; }
+    .self-center { align-self: center; }
+    .self-end { align-self: flex-end; }
+
+    .place-content-demo {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      place-content: center;
+      min-height: 9rem;
+      border: 1px dashed #888;
+      background: #f4f7fb;
+      padding: 0.5rem;
+    }
+
+    .code {
+      background: #f5f5f5;
+      border-left: 4px solid #567;
+      padding: 0.75rem;
+      font-family: Consolas, monospace;
+      white-space: pre-wrap;
+    }
+
+    .split {
+      display: flex;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+      align-items: flex-start;
+    }
+
+    .split > * {
+      flex: 1 1 18rem;
+      min-width: 0;
+    }
+  </style>
+</head>
+<body>
+  <p><a href="index.html">&larr; Back to index</a></p>
+  <h1>Chapter 11: Flexbox Layout</h1>
+
+  <h2>Flexbox Containers</h2>
+  <p>Flexbox is a layout model built for distributing space among items in one dimension. The parent element becomes a flex container.</p>
+
+  <h3>display: flex</h3>
+  <p>The most common flex container makes a block-level flex container.</p>
+  <div class="split">
+    <div class="demo-block">
+      <div class="flex-row">
+        <div class="flex-item">1</div>
+        <div class="flex-item alt">2</div>
+        <div class="flex-item">3</div>
+      </div>
+    </div>
+    <pre class="code"><code>.container {
+  display: flex;
+}</code></pre>
+  </div>
+
+  <h3>display: inline-flex</h3>
+  <p>An inline flex container behaves like an inline element while still creating a flex layout.</p>
+  <div class="split">
+    <div class="demo-block">
+      <span class="inline-demo">
+        <span class="inline-item">A</span>
+        <span class="inline-item alt">B</span>
+        <span class="inline-item">C</span>
+      </span>
+    </div>
+    <pre class="code"><code>.inline-container {
+  display: inline-flex;
+}</code></pre>
+  </div>
+
+  <h2>Container Flex Directions</h2>
+  <p>The main axis can run left-to-right, right-to-left, top-to-bottom, or bottom-to-top.</p>
+
+  <h3>row</h3>
+  <div class="demo-block">
+    <div class="flex-row">
+      <div class="flex-item">1</div>
+      <div class="flex-item alt">2</div>
+      <div class="flex-item">3</div>
+    </div>
+  </div>
+  <pre class="code"><code>.container {
+  display: flex;
+  flex-direction: row;
+}</code></pre>
+
+  <h3>row-reverse</h3>
+  <div class="demo-block">
+    <div class="flex-row row-reverse">
+      <div class="flex-item">1</div>
+      <div class="flex-item alt">2</div>
+      <div class="flex-item">3</div>
+    </div>
+  </div>
+  <pre class="code"><code>.container {
+  display: flex;
+  flex-direction: row-reverse;
+}</code></pre>
+
+  <h3>column</h3>
+  <div class="demo-block">
+    <div class="flex-column">
+      <div class="flex-item">1</div>
+      <div class="flex-item alt">2</div>
+      <div class="flex-item">3</div>
+    </div>
+  </div>
+  <pre class="code"><code>.container {
+  display: flex;
+  flex-direction: column;
+}</code></pre>
+
+  <h3>column-reverse</h3>
+  <div class="demo-block">
+    <div class="flex-column column-reverse">
+      <div class="flex-item">1</div>
+      <div class="flex-item alt">2</div>
+      <div class="flex-item">3</div>
+    </div>
+  </div>
+  <pre class="code"><code>.container {
+  display: flex;
+  flex-direction: column-reverse;
+}</code></pre>
+
+  <h2>Flex Wrap</h2>
+  <p>Flex containers can keep items on one line or wrap them onto additional lines.</p>
+
+  <h3>nowrap</h3>
+  <div class="demo-block">
+    <div class="flex-row nowrap" style="width: 15rem;">
+      <div class="flex-item">1</div>
+      <div class="flex-item alt">2</div>
+      <div class="flex-item">3</div>
+      <div class="flex-item alt">4</div>
+      <div class="flex-item">5</div>
+    </div>
+  </div>
+  <pre class="code"><code>.container {
+  display: flex;
+  flex-wrap: nowrap;
+}</code></pre>
+
+  <h3>wrap</h3>
+  <div class="demo-block">
+    <div class="flex-row wrap" style="width: 15rem;">
+      <div class="flex-item">1</div>
+      <div class="flex-item alt">2</div>
+      <div class="flex-item">3</div>
+      <div class="flex-item alt">4</div>
+      <div class="flex-item">5</div>
+    </div>
+  </div>
+  <pre class="code"><code>.container {
+  display: flex;
+  flex-wrap: wrap;
+}</code></pre>
+
+  <h3>wrap-reverse</h3>
+  <div class="demo-block">
+    <div class="flex-row wrap-reverse" style="width: 15rem;">
+      <div class="flex-item">1</div>
+      <div class="flex-item alt">2</div>
+      <div class="flex-item">3</div>
+      <div class="flex-item alt">4</div>
+      <div class="flex-item">5</div>
+    </div>
+  </div>
+  <pre class="code"><code>.container {
+  display: flex;
+  flex-wrap: wrap-reverse;
+}</code></pre>
+
+  <h2>Flex Flow</h2>
+  <p>Flex flow is the shorthand for <strong>flex-direction</strong> and <strong>flex-wrap</strong>.</p>
+  <div class="split">
+    <div class="demo-block">
+      <div class="flex-row" style="flex-flow: row wrap; width: 16rem;">
+        <div class="flex-item">1</div>
+        <div class="flex-item alt">2</div>
+        <div class="flex-item">3</div>
+        <div class="flex-item alt">4</div>
+        <div class="flex-item">5</div>
+      </div>
+    </div>
+    <pre class="code"><code>.container {
+  flex-flow: row wrap;
+}</code></pre>
+  </div>
+
+  <h2>Aligning flex items</h2>
+  <p>Alignment happens along the main axis with <strong>justify-content</strong> and along the cross axis with <strong>align-items</strong>.</p>
+
+  <h3>justify-content</h3>
+  <p>This controls how items are distributed along the main axis.</p>
+  <div class="demo-block">
+    <div class="flex-row justify-start" style="width: 100%;"><div class="flex-item">A</div><div class="flex-item alt">B</div><div class="flex-item">C</div></div>
+    <div class="flex-row justify-end" style="width: 100%; margin-top: 0.5rem;"><div class="flex-item">A</div><div class="flex-item alt">B</div><div class="flex-item">C</div></div>
+    <div class="flex-row justify-center" style="width: 100%; margin-top: 0.5rem;"><div class="flex-item">A</div><div class="flex-item alt">B</div><div class="flex-item">C</div></div>
+    <div class="flex-row justify-space-between" style="width: 100%; margin-top: 0.5rem;"><div class="flex-item">A</div><div class="flex-item alt">B</div><div class="flex-item">C</div></div>
+    <div class="flex-row justify-space-around" style="width: 100%; margin-top: 0.5rem;"><div class="flex-item">A</div><div class="flex-item alt">B</div><div class="flex-item">C</div></div>
+    <div class="flex-row justify-space-evenly" style="width: 100%; margin-top: 0.5rem;"><div class="flex-item">A</div><div class="flex-item alt">B</div><div class="flex-item">C</div></div>
+  </div>
+  <pre class="code"><code>.container {
+  display: flex;
+  justify-content: space-between;
+}</code></pre>
+
+  <h3>align-items</h3>
+  <p>This controls how items are aligned on the cross axis.</p>
+  <div class="demo-block">
+    <div class="flex-row align-stretch" style="height: 6rem; margin-top: 0.5rem;"><div class="flex-item">stretch</div><div class="flex-item alt tall">B</div><div class="flex-item">C</div></div>
+    <div class="flex-row align-start" style="height: 6rem; margin-top: 0.5rem;"><div class="flex-item">start</div><div class="flex-item alt tall">B</div><div class="flex-item">C</div></div>
+    <div class="flex-row align-center" style="height: 6rem; margin-top: 0.5rem;"><div class="flex-item">center</div><div class="flex-item alt tall">B</div><div class="flex-item">C</div></div>
+    <div class="flex-row align-end" style="height: 6rem; margin-top: 0.5rem;"><div class="flex-item">end</div><div class="flex-item alt tall">B</div><div class="flex-item">C</div></div>
+    <div class="flex-row align-baseline" style="height: 6rem; margin-top: 0.5rem;">
+      <div class="flex-item" style="font-size: 1.1rem;">baseline</div>
+      <div class="flex-item alt tall" style="font-size: 2rem;">B</div>
+      <div class="flex-item" style="font-size: 0.8rem;">C</div>
+    </div>
+  </div>
+  <pre class="code"><code>.container {
+  display: flex;
+  align-items: center;
+}</code></pre>
+
+  <h2>Aligning individual flex items</h2>
+  <p>A flex item can override the container alignment using <strong>align-self</strong>.</p>
+  <div class="demo-block">
+    <div class="flex-row align-center" style="height: 8rem;">
+      <div class="flex-item">A</div>
+      <div class="flex-item alt self-start" style="height: 4rem;">self-start</div>
+      <div class="flex-item self-center" style="height: 5rem;">self-center</div>
+      <div class="flex-item alt self-end" style="height: 3rem;">self-end</div>
+    </div>
+  </div>
+  <pre class="code"><code>.item {
+  align-self: flex-start;
+}
+
+.item-2 {
+  align-self: center;
+}</code></pre>
+
+  <h2>place-content</h2>
+  <p>Place-content is a shorthand for setting both <strong>justify-content</strong> and <strong>align-content</strong> for multi-line flex containers.</p>
+  <div class="demo-block">
+    <div class="place-content-demo" style="width: 24rem;">
+      <div class="flex-item">1</div>
+      <div class="flex-item alt">2</div>
+      <div class="flex-item">3</div>
+      <div class="flex-item alt">4</div>
+      <div class="flex-item">5</div>
+      <div class="flex-item alt">6</div>
+      <div class="flex-item">7</div>
+      <div class="flex-item alt">8</div>
+    </div>
+  </div>
+  <pre class="code"><code>.container {
+  display: flex;
+  flex-wrap: wrap;
+  place-content: center;
+}</code></pre>
+
+  <h2>Gap</h2>
+  <p>Gap adds spacing between flex items without requiring margins. This works for both row and column gaps.</p>
+  <div class="split">
+    <div class="demo-block">
+      <div class="flex-row" style="gap: 1rem;">
+        <div class="flex-item">1</div>
+        <div class="flex-item alt">2</div>
+        <div class="flex-item">3</div>
+      </div>
+    </div>
+    <pre class="code"><code>.container {
+  display: flex;
+  gap: 1rem;
+}</code></pre>
+  </div>
+
+  <div class="demo-block">
+    <div class="flex-column" style="gap: 0.75rem; height: 12rem;">
+      <div class="flex-item">A</div>
+      <div class="flex-item alt">B</div>
+      <div class="flex-item">C</div>
+    </div>
+  </div>
+  <pre class="code"><code>.container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}</code></pre>
+
+  <h2>Summary</h2>
+  <p>Flexbox gives you control over how items flow in one dimension. Use <strong>display: flex</strong> or <strong>display: inline-flex</strong> to create containers, choose a main axis with <strong>flex-direction</strong>, allow wrapping with <strong>flex-wrap</strong>, and align items with <strong>justify-content</strong>, <strong>align-items</strong>, <strong>align-self</strong>, and <strong>place-content</strong>. The <strong>gap</strong> property adds clean spacing without extra markup.</p>
+</body>
+</html>
